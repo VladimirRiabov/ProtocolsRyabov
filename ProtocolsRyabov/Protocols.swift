@@ -9,9 +9,7 @@
 import UIKit
 
 //MARK: - Protocol for the second type cell
-protocol Rotate {
-    
-}
+protocol Rotate {}
 extension Rotate where Self: UIView {
     func rotationCell(view : UIView, delay: TimeInterval) {
         let animationDuration = 1.5
@@ -26,12 +24,11 @@ extension Rotate where Self: UIView {
             view.backgroundColor = .random()
         }, completion: nil)
     }
+    
 }
 
 //MARK: - Protocol for the second type cell
-protocol ShakeAndFade {
-    
-}
+protocol ShakeAndFade {}
 extension ShakeAndFade where Self: UIView {
     func shake() {
         let anim = CABasicAnimation(keyPath: "position")
@@ -44,7 +41,7 @@ extension ShakeAndFade where Self: UIView {
     }
     
     func fadeViewInThenOut(view : UIView, delay: TimeInterval) {
-
+        
         let animationDuration = 1.5
         UIView.animate(withDuration: animationDuration, delay: delay, options: [UIView.AnimationOptions.autoreverse, UIView.AnimationOptions.repeat], animations: {
             view.alpha = 0
@@ -57,6 +54,14 @@ extension ShakeAndFade where Self: UIView {
             view.backgroundColor = .random()
         }, completion: nil)
     }
-  
+}
+
+//MARK: - Случай #2, когде реализация методов протокола описана в самих классах и у нас есть метод который принимает объекты с этим протоколом
+protocol Drawer {
+    func drawIcon(view : UIView)
+}
+
+func makeAnIcon(cellWithProtocolDrawer: Drawer, view: UIView) {
+    cellWithProtocolDrawer.drawIcon(view: view)
 }
 

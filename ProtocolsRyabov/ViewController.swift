@@ -37,13 +37,13 @@ class ViewController: UIViewController {
         
         collectionView.register(MyCell.self, forCellWithReuseIdentifier: "MyCell")
         collectionView.register(MyCell2.self, forCellWithReuseIdentifier: "MyCell2")
-      
+        
     }
 }
 
 //MARK: - Data Source
 extension ViewController: UICollectionViewDataSource {
-     func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
     
@@ -52,24 +52,24 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      if indexPath.section == 0 {
-        let dequeuedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
-
-        guard let cellOne = dequeuedCell as? MyCell else {
-          fatalError("Wrong cell type for section 0. Expected MyCell")
+        if indexPath.section == 0 {
+            let dequeuedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
+            
+            guard let cellOne = dequeuedCell as? MyCell else {
+                fatalError("Wrong cell type for section 0. Expected MyCell")
+            }
+            return cellOne
+            
+        } else {
+            
+            let dequeuedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell2", for: indexPath)
+            
+            guard let cellTwo = dequeuedCell as? MyCell2 else {
+                fatalError("Wrong cell type for section 0. Expected MyCell2")
+            }
+            
+            return cellTwo
         }
-        return cellOne
-          
-      } else {
-          
-        let dequeuedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell2", for: indexPath)
-
-        guard let cellTwo = dequeuedCell as? MyCell2 else {
-          fatalError("Wrong cell type for section 0. Expected MyCell2")
-        }
-
-        return cellTwo
-      }
     }
 }
 
@@ -80,13 +80,13 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width / 10, height: view.frame.height / 20)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-      if section == 0 {
-        return UIEdgeInsets(top: 0, left: 0, bottom: sectionSpacing / 2, right: 0)
-      } else {
-        return UIEdgeInsets(top: sectionSpacing / 2, left: 0, bottom: sectionSpacing / 2, right: 0)
-      }
+        if section == 0 {
+            return UIEdgeInsets(top: 0, left: 0, bottom: sectionSpacing / 2, right: 0)
+        } else {
+            return UIEdgeInsets(top: sectionSpacing / 2, left: 0, bottom: sectionSpacing / 2, right: 0)
+        }
     }
-      
+    
 }
 
 //MARK: - DelegateMethods
@@ -98,16 +98,18 @@ extension ViewController: UICollectionViewDelegate {
         if let cell = collectionView.cellForItem(at: indexPath) as? MyCell {
             cell.rotationCell(view: cell.contentView, delay: 0.01)
             cell.randomColor(view: cell.contentView, delay: 0.01)
+            cell.drawIcon(view: cell.contentView)
+            
             
         }
         if let cell = collectionView.cellForItem(at: indexPath) as? MyCell2 {
             cell.shake()
             cell.fadeViewInThenOut(view: cell.contentView, delay: 0.2)
             cell.randomColor(view: cell.contentView, delay: 0.01)
+            cell.drawIcon(view: cell.contentView)
         }
         
     }
-    
     
 }
 
