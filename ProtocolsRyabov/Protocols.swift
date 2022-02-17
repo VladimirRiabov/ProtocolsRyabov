@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - Protocol for the second type cell
+//MARK: - Protocol for the first type cell
 protocol Rotate {}
 extension Rotate where Self: UIView {
     func rotationCell(view : UIView, delay: TimeInterval) {
